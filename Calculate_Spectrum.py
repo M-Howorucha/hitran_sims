@@ -36,8 +36,11 @@ def Hapi_Spectrum(T,P,L,OmegaRange,WavenumberStep,ConcDict):
     '''
     ConcDictList = list(ConcDict.keys())
 
-    r = hp.tableList().__repr__()
-    species = np.array(r[25:-3].split("', '"))
+    r = list(hp.tableList())
+    bad_words = ['sampletab','__BUFFER__']
+    for word in bad_words:
+        del(r[r.index(word)])
+    species = np.array(r)
     
     Components = []
 
